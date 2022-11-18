@@ -1,7 +1,18 @@
 <h1>Books#index</h1>
 
-<%= link_to "Books#showへ",user_path(@user.id) %>
-<table class="books">
+<%= link_to "Users#showへ",user_path(@user.id) %>
+
+<%= form_with model:book, url:books_path, method: :post do |f| %>
+  <p>Title</p>
+  <%= f.text_field:title %>
+  <p>Body</p>
+  <%=f.text_area :body%>
+  <div>
+    <%=f.submit'Create Book'%>
+  </div>
+<%end%>
+
+  <table class="books">
     <tr>
       <th>Title</th>
       <th>Body</th>

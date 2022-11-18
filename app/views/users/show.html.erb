@@ -1,10 +1,14 @@
 <h1>Users#show</h1>
 
+<%= form_with model: @user do |auser| %>
+  <%= auser.file_field :image, accept: "image/*" %>
+  <%= auser.text_field :name %>
+  <%= auser.text_area :introduction %>
 
-<%= link_to "プロフィール更新",edit_user_path(@user.id) %>
 
-<% newbook=Book.new %>
-<%= form_with model:book, url:books_path(newbook.id), method: :post do |f| %>
+<%= link_to "プロフィール更新",edit_user_path(auser.id) %>
+
+<%= form_with model:book, url:books_path, method: :post do |f| %>
   <p>Title</p>
   <%= f.text_field:title %>
   <p>Body</p>
