@@ -1,0 +1,14 @@
+<h1>Users#edit</h1>
+
+<%= form_with model:@user, url:edit_user_path(@user.id), do |f| %>
+  <div class="new-book">
+      <p>name</p>
+      <%= f.text_field:title %>
+      <p>introduction</p>
+      <%=f.text_area :introduction %>
+    </div>
+
+    <div class="new-book">
+      <%=f.submit'Update User'%>
+    </div>
+  <%end%>

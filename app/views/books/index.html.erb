@@ -1,0 +1,17 @@
+<h1>Books#index</h1>
+
+<%= link_to "Books#showへ",user_path(@user.id) %>
+<table class="books">
+    <tr>
+      <th>Title</th>
+      <th>Body</th>
+    </tr>
+    <% @books.each do |abook| %>
+      <tr height="20">
+        <td><%= abook.title %></td>
+        <td><%= abook.body %></td>
+        <td><%=link_to "Show", book_path(abook.id) %></td>
+        <td><%=link_to "Destroy", book_path(abook.id), method: :delete, "data-confirm"=>"Are you sure?" %></td>
+      </tr>
+    <% end %>
+  </table>

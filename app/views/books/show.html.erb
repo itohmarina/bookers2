@@ -1,0 +1,8 @@
+<h1>Books#show</h1>
+
+<%= link_to "プロフィール更新",edit_user_path(@user.id) %>
+
+<%= form_with model:@book, url:"books_path", method: :post do |f| %>
+<!--新しい投稿-->
+
+<%= link_to "投稿更新",edit_book_path(book.id) %>

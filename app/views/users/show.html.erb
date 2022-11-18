@@ -1,0 +1,30 @@
+<h1>Users#show</h1>
+
+
+<%= link_to "プロフィール更新",edit_user_path(@user.id) %>
+
+<% newbook=Book.new %>
+<%= form_with model:book, url:books_path(newbook.id), method: :post do |f| %>
+  <p>Title</p>
+  <%= f.text_field:title %>
+  <p>Body</p>
+  <%=f.text_area :body%>
+  <div>
+    <%=f.submit'Create Book'%>
+  </div>
+<%end%>
+
+<table class="books">
+  <tr>
+    <th>Title</th>
+    <th>Body</th>
+  </tr>
+  <% @books.each do |abook| %>
+    <tr height="20">
+      <td><%= abook.title %></td>
+      <td><%= abook.body %></td>
+      <td><%= link_to "投稿更新",edit_book_path(abook.id) %></td>
+      <td><%=link_to "Destroy", book_path(abook.id), method: :delete, "data-confirm"=>"Are you sure?" %></td>
+    </tr>
+  <%end%>
+</table>
