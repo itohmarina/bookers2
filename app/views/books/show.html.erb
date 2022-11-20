@@ -2,7 +2,10 @@
 
 <%= link_to "プロフィール更新",edit_user_path(@user.id) %>
 
-<%= form_with model:@book, url:"books_path", method: :post do |f| %>
+<%= form_with model:@book, url:"user_books_path", method: :post do |f| %>
 <!--新しい投稿-->
 
-<%= link_to "投稿更新",edit_book_path(book.id) %>
+<% if @book.user_id == current_user %>
+  <%= link_to "削除", user_book_path(@book.id), method: :delete %>
+  <%= link_to "投稿更新",edit_user_book_path(@book.id) %>
+<% end %>

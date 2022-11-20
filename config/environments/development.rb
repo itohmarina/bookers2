@@ -75,4 +75,8 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
   config.active_job.queue_adapter= :inline
 
+  config.hosts.clear
+
+  config.web_console.whitelisted_ips ='114.159.212.107'
+
 end

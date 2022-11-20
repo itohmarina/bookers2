@@ -1,17 +1,16 @@
 <h1>Users#show</h1>
 
-<%= form_with model: @user do |auser| %>
-  <%= auser.file_field :image, accept: "image/*" %>
-  <%= auser.text_field :name %>
-  <%= auser.text_area :introduction %>
+
+  <%= image_tag @user.get_profile_image(100,100) %>
 
 
-<%= link_to "プロフィール更新",edit_user_path(auser.id) %>
+<%= link_to "プロフィール更新",edit_user_path(@user.id) %>
 
-<%= form_with model:book, url:books_path, method: :post do |f| %>
+
+<%= form_with model:Book.new, url:user_books_path(current_user.id), method: :post do |f| %>
   <p>Title</p>
   <%= f.text_field:title %>
-  <p>Body</p>
+  <p>Opinion</p>
   <%=f.text_area :body%>
   <div>
     <%=f.submit'Create Book'%>
@@ -23,12 +22,12 @@
     <th>Title</th>
     <th>Body</th>
   </tr>
-  <% @books.each do |abook| %>
+  <%# @books.each do |abook| %>
     <tr height="20">
-      <td><%= abook.title %></td>
-      <td><%= abook.body %></td>
-      <td><%= link_to "投稿更新",edit_book_path(abook.id) %></td>
-      <td><%=link_to "Destroy", book_path(abook.id), method: :delete, "data-confirm"=>"Are you sure?" %></td>
+      <td><%#= abook.title %></td>
+      <td><%#= abook.body %></td>
+      <td><%#= link_to "投稿更新",edit_book_path(abook.id) %></td>
+      <td><%#=link_to "Destroy", book_path(abook.id), method: :delete, "data-confirm"=>"Are you sure?" %></td>
     </tr>
-  <%end%>
+  <%#end%>
 </table>

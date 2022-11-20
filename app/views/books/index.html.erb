@@ -1,28 +1,41 @@
-<h1>Books#index</h1>
+<h1>User info</h1>
+<%= image_tag @user.get_profile_image(100,100) %>
+<p>
+  <b>name </b><%= @user.name %>
+</p>
+<p>
+  <b>introduction </b>
+  <% int=@user.introduction %>
+  <% if int.present? %>
+    <%= int %>
+  <% end %>
+</p>
 
 <%= link_to "Users#showへ",user_path(@user.id) %>
 
-<%= form_with model:book, url:books_path, method: :post do |f| %>
+<h1>New book</h1>
+<%= form_with model:@book, url:user_books_path, method: :post do |f| %>
   <p>Title</p>
   <%= f.text_field:title %>
-  <p>Body</p>
+  <p>opinion</p>
   <%=f.text_area :body%>
   <div>
     <%=f.submit'Create Book'%>
   </div>
 <%end%>
 
+  <h1>Books</h1>
   <table class="books">
     <tr>
       <th>Title</th>
-      <th>Body</th>
+      <th>Opinion</th>
     </tr>
     <% @books.each do |abook| %>
       <tr height="20">
         <td><%= abook.title %></td>
         <td><%= abook.body %></td>
-        <td><%=link_to "Show", book_path(abook.id) %></td>
-        <td><%=link_to "Destroy", book_path(abook.id), method: :delete, "data-confirm"=>"Are you sure?" %></td>
+        <td><%=link_to "Show", user_book_path(abook.id) %></td>
+        <td><%=link_to "Destroy", user_book_path(abook.id), method: :delete, "data-confirm"=>"Are you sure?" %></td>
       </tr>
     <% end %>
   </table>
