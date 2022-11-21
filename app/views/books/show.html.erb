@@ -1,11 +1,51 @@
+<div>
+  <%= flash[:notice] %>
+</div>
+
 <h1>Books#show</h1>
 
+<%= image_tag @user.get_profile_image(100,100) %>
+<p>
+  <b>name </b><%= @user.name %>
+</p>
+<p>
+  <b>introduction </b>
+  <% int=@user.introduction %>
+  <% if int.present? %>
+    <%= int %>
+  <% end %>
+</p>
 <%= link_to "プロフィール更新",edit_user_path(@user.id) %>
 
-<%= form_with model:@book, url:"user_books_path", method: :post do |f| %>
+<h1>New book</h1>
+<%= form_with model:@book, url:books_path, method: :post do |f| %>
+  <p>Title</p>
+  <%= f.text_field:title %>
+  <p>opinion</p>
+  <%=f.text_area :body%>
+  <div>
+    <%=f.submit'Create Book'%>
+  </div>
+<%end%>
 <!--新しい投稿-->
 
-<% if @book.user_id == current_user %>
-  <%= link_to "削除", user_book_path(@book.id), method: :delete %>
-  <%= link_to "投稿更新",edit_user_book_path(@book.id) %>
-<% end %>
+<h1>Book detail</h1>
+  <table class="books">
+    <tr>
+      <tr></tr>
+      <th>Title</th>
+      <th>Opinion</th>
+      <th></th>
+      <tr></tr>
+    </tr>
+    <tr height="20">
+      <td><%= image_tag @book.user.get_profile_image(50,50) %></td>
+      <td><%= @book.title %></td>
+      <td><%= @book.body %></td>
+      <td><% if @book.user==current_user %>
+        <%= link_to "Edit",edit_book_path(@book) %>
+        <%= link_to "Destroy", book_path(@book), method: :delete, "data-confirm"=>"Are you sure?"%>
+      <% end %></td>
+    </tr>
+  </table>
+

@@ -1,13 +1,25 @@
+<div>
+  <%= flash[:notice] %>
+</div>
+
 <h1>Users#show</h1>
 
+<%= image_tag @user.get_profile_image(100,100) %>
 
-  <%= image_tag @user.get_profile_image(100,100) %>
-
-
+<p>
+  <b>name </b><%= @user.name %>
+</p>
+<p>
+  <b>introduction </b>
+  <% int=@user.introduction %>
+  <% if int.present? %>
+    <%= int %>
+  <% end %>
+</p>
 <%= link_to "プロフィール更新",edit_user_path(@user.id) %>
 
 
-<%= form_with model:Book.new, url:user_books_path(current_user.id), method: :post do |f| %>
+<%= form_with model:Book.new, url:books_path(current_user.id), method: :post do |f| %>
   <p>Title</p>
   <%= f.text_field:title %>
   <p>Opinion</p>
@@ -19,15 +31,14 @@
 
 <table class="books">
   <tr>
-    <th>Title</th>
-    <th>Body</th>
+    <th>title</th>
+    <th>opinion</th>
   </tr>
-  <%# @books.each do |abook| %>
+  <% @books.each do |abook| %>
     <tr height="20">
-      <td><%#= abook.title %></td>
-      <td><%#= abook.body %></td>
-      <td><%#= link_to "投稿更新",edit_book_path(abook.id) %></td>
-      <td><%#=link_to "Destroy", book_path(abook.id), method: :delete, "data-confirm"=>"Are you sure?" %></td>
+      <td><%= abook.title %></td>
+      <td><%= abook.body %></td>
+      <td><%= link_to "Show", book_path(abook.id) %></td>
     </tr>
-  <%#end%>
+  <%end%>
 </table>

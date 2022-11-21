@@ -1,4 +1,21 @@
 <h1>User info</h1>
+<div>
+  <%= flash[:notice] %>
+</div>
+
+<% if @book.errors.any? %>
+  <% if @book.errors.count==1 %>
+    <h3>An error has occurred.</h3>
+  <%else%>
+    <h3><%= @book.errors.count %>error has occurred.</h3>
+  <%end%>
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= image_tag @user.get_profile_image(100,100) %>
 <p>
   <b>name </b><%= @user.name %>
@@ -10,17 +27,17 @@
     <%= int %>
   <% end %>
 </p>
+<%= link_to "プロフィール更新",edit_user_path(@user.id) %>
 
-<%= link_to "Users#showへ",user_path(@user.id) %>
 
 <h1>New book</h1>
-<%= form_with model:@book, url:user_books_path, method: :post do |f| %>
+<%= form_with model:Book.new, url:books_path, method: :post do |f| %>
   <p>Title</p>
   <%= f.text_field:title %>
   <p>opinion</p>
   <%=f.text_area :body%>
   <div>
-    <%=f.submit'Create Book'%>
+  <%=f.submit'Create Book'%>
   </div>
 <%end%>
 
@@ -32,10 +49,12 @@
     </tr>
     <% @books.each do |abook| %>
       <tr height="20">
+        <td><%= link_to user_path(abook.user_id) do %>
+          <%= image_tag(abook.user.get_profile_image(50,50)) %>
+        <%end%></td>
         <td><%= abook.title %></td>
         <td><%= abook.body %></td>
-        <td><%=link_to "Show", user_book_path(abook.id) %></td>
-        <td><%=link_to "Destroy", user_book_path(abook.id), method: :delete, "data-confirm"=>"Are you sure?" %></td>
+        <td><%= link_to "Show", book_path(abook.id) %></td>
       </tr>
     <% end %>
   </table>

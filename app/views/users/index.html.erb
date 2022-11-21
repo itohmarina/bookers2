@@ -14,11 +14,13 @@
     <th>name</th>
     <th>books</th>
   </tr>
-  <%@users.each do |u| %>
+    <% @users.each do |a_user| %>
     <tr height="20">
-      <td><%= image_tag u.get_profile_image(100,100) %></td>
-      <td><%= u.text_field :name %></td>
-      <td><%= link_to "users#show",user_path(u.id) %></td>
+      <td><%= link_to user_path(a_user.id) do %>
+          <%= image_tag(a_user.get_profile_image(50,50)) %>
+        <%end%></td>
+      <td><%= a_user.name %></td>
+      <td><%= link_to "Show", user_path(a_user.id) %></td>
     </tr>
   <%end%>
 </table>

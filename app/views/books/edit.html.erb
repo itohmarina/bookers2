@@ -1,6 +1,19 @@
+<% if @book.errors.any? %>
+  <% if @book.errors.count==1 %>
+    <h3>An error has occurred.</h3>
+  <%else%>
+    <h3><%= @book.errors.count %>error has occurred.</h3>
+  <%end%>
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <h1>Books#edit</h1>
 
-<%= form_with model:@book, url:book_path(@book.id), method: :patch, do |f| %>
+<%= form_with model:@book, url:book_path(@book.id), method: :patch do |f| %>
   <div class="new-book">
       <p>Title</p>
       <%= f.text_field:title %>
@@ -12,3 +25,4 @@
       <%=f.submit'Update Book'%>
     </div>
   <%end%>
+

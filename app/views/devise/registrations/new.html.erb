@@ -1,3 +1,16 @@
+<% if @book.errors.any? %>
+  <% if @book.errors.count==1 %>
+    <h3>An error has occurred.</h3>
+  <%else%>
+    <h3><%= @book.errors.count %>error has occurred.</h3>
+  <%end%>
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
