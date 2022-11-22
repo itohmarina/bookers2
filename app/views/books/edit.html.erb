@@ -11,6 +11,18 @@
   </ul>
 <% end %>
 
+<h1>New book</h1>
+<% new_book=Book.new %>
+<%= form_with model:new_book, url:books_path, method: :post do |f| %>
+  <p>Title</p>
+  <%= f.text_field:title %>
+  <p>Opinion</p>
+  <%=f.text_area :body%>
+  <div>
+    <%=f.submit'Create Book'%>
+  </div>
+<%end%>
+
 <h1>Books#edit</h1>
 
 <%= form_with model:@book, url:book_path(@book.id), method: :patch do |f| %>

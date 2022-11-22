@@ -18,7 +18,8 @@
 <%= link_to "プロフィール更新",edit_user_path(@user.id) %>
 
 <h1>New book</h1>
-<%= form_with model:@book, url:books_path, method: :post do |f| %>
+<% new_book=Book.new %>
+<%= form_with model:new_book, url:books_path, method: :post do |f| %>
   <p>Title</p>
   <%= f.text_field:title %>
   <p>opinion</p>

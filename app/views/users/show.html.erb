@@ -6,20 +6,24 @@
 
 <%= image_tag @user.get_profile_image(100,100) %>
 
-<p>
-  <b>name </b><%= @user.name %>
-</p>
-<p>
-  <b>introduction </b>
-  <% int=@user.introduction %>
-  <% if int.present? %>
-    <%= int %>
-  <% end %>
-</p>
+<table class="user">
+  <tr>
+    <th>name</th><td><%= @user.name %></td>
+  </tr>
+  <tr>
+    <th>introduction </th>
+    <td><% int=@user.introduction %>
+        <% if int.present? %>
+          <%= int %>
+        <% end %></td>
+  </tr>
+</table>
+
 <%= link_to "プロフィール更新",edit_user_path(@user.id) %>
 
-
-<%= form_with model:Book.new, url:books_path(current_user.id), method: :post do |f| %>
+<h1>New book</h1>
+<% new_book=Book.new %>
+<%= form_with model:new_book, url:books_path, method: :post do |f| %>
   <p>Title</p>
   <%= f.text_field:title %>
   <p>Opinion</p>
