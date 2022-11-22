@@ -1,3 +1,4 @@
+<% @book=Book.new %>
 <% if @book.errors.any? %>
   <% if @book.errors.count==1 %>
     <h3>An error has occurred.</h3>
@@ -18,12 +19,12 @@
 
   <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name, autofocus: true %>
   </div>
 
-    <div class="field">
+  <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email %>
+    <%= f.email_field :email,autofocus: true %>
   </div>
 
   <div class="field">
