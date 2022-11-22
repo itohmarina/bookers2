@@ -1,4 +1,4 @@
-<h1>Users#edit</h1>
+<h1>User info</h1>
 <% if @user.errors.any? %>
   <% if @user.errors.count==1 %>
     <h3>An error has occurred.</h3>
@@ -20,6 +20,6 @@
   <%= f.text_area :introduction %>
 
   <div class="new-book">
-  <%=f.submit'Update User'%>
+  <%=f.submit'Update User', class:"btn btn-secondary"%>
   </div>
 <%end%>

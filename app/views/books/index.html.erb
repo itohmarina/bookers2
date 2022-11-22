@@ -1,3 +1,8 @@
+<div class="container">
+  <div class="row">
+
+
+<div class="col-xl-4">
 <h1>User info</h1>
 <div>
   <%= flash[:notice] %>
@@ -17,19 +22,26 @@
 <% end %>
 
 <%= image_tag @user.get_profile_image(100,100) %>
-<p>
-  <b>name </b><%= @user.name %>
-</p>
-<p>
-  <b>introduction </b>
-  <% int=@user.introduction %>
-  <% if int.present? %>
-    <%= int %>
-  <% end %>
-</p>
-<%= link_to "プロフィール更新",edit_user_path(@user.id) %>
+<table class="table">
+  <tr class="col">
+    <th>name</th><td><%= @user.name %></td>
+  </tr>
+  <tr>
+    <th>introduction </th>
+    <td><% int=@user.introduction %>
+        <% if int.present? %>
+          <%= int %>
+        <% end %></td>
+  </tr>
+</table>
 
+<div>
+<%= link_to edit_user_path(@user.id),class:"btn btn-secondary" do%>
+  <i class="fas fa-user-cog"></i>
+<%end%>
+</div>
 
+<div>
 <h1>New book</h1>
 <% new_book=Book.new %>
 <%= form_with model:new_book, url:books_path, method: :post do |f| %>
@@ -37,14 +49,16 @@
   <%= f.text_field:title %>
   <p>opinion</p>
   <%=f.text_area :body%>
-  <div>
-  <%=f.submit'Create Book'%>
-  </div>
+  <button class="btn p-1 mb-2 btn-success text-white" type="submit">Create Book</button>
 <%end%>
+</div>
+</div>
 
+
+<div class="col-xl-8">
   <h1>Books</h1>
-  <table class="books">
-    <tr>
+  <table class="table">
+    <tr class="col">
       <th>Title</th>
       <th>Opinion</th>
     </tr>
@@ -59,3 +73,8 @@
       </tr>
     <% end %>
   </table>
+</div>
+
+
+</div>
+</div>
