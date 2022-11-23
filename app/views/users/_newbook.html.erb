@@ -1,0 +1,20 @@
+<!--@user→user-->
+
+
+  <div>
+    <%= link_to edit_user_path(user.id),class:"btn btn-secondary" do%>
+      <i class="fas fa-user-cog"></i>
+    <%end%>
+  </div>
+
+<div>
+  <h1>New book</h1>
+    <% new_book=Book.new %>
+      <%= form_with model:new_book, url:books_path, method: :post do |f| %>
+        <p>Title</p>
+          <%= f.text_field:title %>
+        <p>Opinion</p>
+          <%=f.text_area :body%>
+        <button class="btn p-1 mb-2 btn-success text-white" type="submit">Create Book</button>
+      <%end%>
+</div>

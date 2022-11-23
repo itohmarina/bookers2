@@ -1,3 +1,19 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 // cssを記述
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.nav-item{
+  text-decoration:none;/*ハイパーリンクの文字装飾機能をなしにする*/
+}
+
+.new-book{
+  width:300px;
+  hight:500px;
+  margin-right:auto;
+  margin-left:auto;
+}

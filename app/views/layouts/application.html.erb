@@ -6,7 +6,6 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <script src="https://kit.fontawesome.com/*******.js" crossorigin="anonymous"></script>
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -31,7 +30,7 @@
                 </li>
                 <li class="nav-item">
                   <i class="fas fa-users"></i>
-                  <%= link_to"Users",users_path(current_user.id) %>
+                  <%= link_to"Users",users_path %>
                 </li>
                 <li class="nav-item">
                   <i class="fas fa-book-open"></i>
@@ -56,7 +55,7 @@
                 </li>
                 <li class="nav-item">
                   <i class="fas fa-sign-in-alt"></i>
-                  <%= link_to "Sign in",new_user_session_path %>
+                  <%= link_to "Log in",new_user_session_path %>
                 </li>
 
               <%end%>

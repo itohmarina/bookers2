@@ -1,60 +1,45 @@
 <div class="container">
   <div class="row">
 
-<div class="col-xl-4">
+    <div class="col-md-3">
 
-<%= image_tag @user.get_profile_image(100,100) %>
-<table class="table">
-  <tr class="col">
-    <th>name</th><td><%= @user.name %></td>
-  </tr>
-  <tr>
-    <th>introduction </th>
-    <td><% int=@user.introduction %>
-        <% if int.present? %>
-          <%= int %>
-        <% end %></td>
-  </tr>
-</table>
+      <%= image_tag @user.get_profile_image(100,100) %>
+      <table class="table">
+        <tr>
+          <th scope="col-md-2">name</th><td><%= @user.name %></td>
+        </tr>
+        <tr>
+          <th>introduction </th>
+          <td><% int=@user.introduction %>
+              <% if int.present? %>
+                <%= int %>
+              <% end %></td>
+        </tr>
+      </table>
 
-<div>
-<%= link_to edit_user_path(@user.id),class:"btn btn-secondary" do%>
-  <i class="fas fa-user-cog"></i>
-<%end%>
-</div>
+      <%= render 'newbook', user:@user %>
 
-<div>
-<h1>New book</h1>
-<% new_book=Book.new %>
-<%= form_with model:new_book, url:books_path, method: :post do |f| %>
-  <p>Title</p>
-  <%= f.text_field:title %>
-  <p>Opinion</p>
-  <%=f.text_area :body%>
-  <button class="btn p-1 mb-2 btn-success text-white" type="submit">Create Book</button>
-<%end%>
-</div>
-</div>
+    </div>
 
-<div class="col-xl-8">
-<h1>Users</h1>
-<table class="table">
-  <tr scope="col">
-    <th>image</th>
-    <th>name</th>
-  </tr>
-    <% @users.each do |a_user| %>
-    <tr height="20">
-      <td><%= link_to user_path(a_user.id) do %>
-          <%= image_tag(a_user.get_profile_image(50,50)) %>
-        <%end%></td>
-      <td><%= a_user.name %></td>
-      <td><%= link_to "Show", user_path(a_user.id) %></td>
-    </tr>
-  <%end%>
-</table>
-</div>
+    <div class="col-md-8 offset-md-1">
+      <h1>Users</h1>
+      <table class="table">
+        <tr>
+          <th scope="col-md-2">image</th>
+          <th scope="col-md-4">name</th>
+          <th scope="col-md-2"></th>
+        </tr>
+        <% @users.each do |a_user| %>
+          <tr height="20">
+            <th scope="row"><%= link_to user_path(a_user.id) do %>
+              <%= image_tag(a_user.get_profile_image(50,50)) %>
+              <%end%></td>
+            <td><%= a_user.name %></td>
+            <td><%= link_to "Show", user_path(a_user.id) %></td>
+          </tr>
+        <%end%>
+      </table>
+    </div>
 
-
-</div>
+  </div>
 </div>

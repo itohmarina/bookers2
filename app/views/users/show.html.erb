@@ -1,65 +1,56 @@
 <div class="container">
   <div class="row">
 
-<div class="col-md-4">
-<div>
-  <%= flash[:notice] %>
-</div>
+    <div class="col-md-3">
+      <div>
+        <%= flash[:notice] %>
+      </div>
 
-<h1>Users info</h1>
-<%= image_tag @user.get_profile_image(100,100) %>
-<table class="table">
-  <tr scope="col">
-    <th>name</th><td><%= @user.name %></td>
-  </tr>
-  <tr scope="col">
-    <th>introduction </th>
-    <td><% int=@user.introduction %>
-        <% if int.present? %>
-          <%= int %>
-        <% end %></td>
-  </tr>
-</table>
+      <h1>Users info</h1>
+        <% if @user.profile_image.nil? %>
+          <%= image_tag "no_image.jpg" %>
+        <% else %>
+          <%= image_tag @user.get_profile_image(100,100) %>
+        <% end %>
+      <table class="table">
+        <tr>
+          <th scope="col-md-2">name</th><td><%= @user.name %></td>
+        </tr>
+        <tr>
+          <th>introduction </th>
+          <td><% int=@user.introduction %>
+              <% if int.present? %>
+                <%= int %>
+              <% end %></td>
+        </tr>
+      </table>
 
-<% if @user.id==current_user.id %>
-<div>
-<%= link_to edit_user_path(@user.id),class:"btn btn-secondary" do%>
-  <i class="fas fa-user-cog"></i>
-<%end%>
-</div>
-<%end%>
+      <%= render 'newbook', user:@user %>
 
-<div>
-<h1>New book</h1>
-<% new_book=Book.new %>
-<%= form_with model:new_book, url:books_path, method: :post do |f| %>
-  <p>Title</p>
-  <%= f.text_field:title %>
-  <p>Opinion</p>
-  <%=f.text_area :body%>
-  <button class="btn p-1 mb-2 btn-success text-white" type="submit">Create Book</button>
-<%end%>
-</div>
-</div>
+    </div>
 
 
-<div class="col-md-8">
-  <h1>Books</h1>
-<table class="table">
-  <tr scope="col">
-    <th>title</th>
-    <th>opinion</th>
-  </tr>
-  <% @books.each do |abook| %>
-    <tr height="20">
-      <th scope="row"><%= abook.title %></th>
-      <td><%= abook.body %></td>
-      <td><%= link_to "Show", book_path(abook.id) %></td>
-    </tr>
-  <%end%>
-</table>
-</div>
+    <div class="col-md-8 offset-md-1">
+      <h1>Books</h1>
+      <table class="table">
+        <tr>
+          <th scope="col-md-2"></th>
+          <th scope="col-md-4">title</th>
+          <th scope="col-md-6">opinion</th>
+        </tr>
+        <% @books.each do |abook| %>
+        <tr height="20">
+          <th scope="row">
+            <%= link_to user_path(@user.id) do %>
+              <%= image_tag(@user.get_profile_image(50,50)) %>
+            <%end%></th>
+          <td><%=link_to abook.title,book_path(abook.id) %></td>
+          <td><%= abook.body %></td>
+        </tr>
+        <%end%>
+      </table>
+    </div>
 
 
-</div>
+  </div>
 </div>
